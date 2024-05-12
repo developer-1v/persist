@@ -1,5 +1,6 @@
+print('1')
 from imports_file import *
-
+print('2')
 # from print_tricks import pt
 # pt.easy_testing(__name__)
 # pt.easy_imports('main.py')
@@ -14,23 +15,20 @@ from imports_file import *
 
 
 
+import sys
 
 def main():
     script_name = 'test.py'
     
-    CxFreezeCreator(script_name, "cxfreeze")
-    pt.ex()
-
+    # Simulate detailed command line arguments
+    # Example: ['main.py', 'build', '--target', 'script_name']
+    # You need to adjust these arguments based on the actual expected format.
+    sys.argv = ['main.py', 'build', '--target', script_name]
+    pt(sys.argv)
     execution_mode = 'ask'  # Options: 'ask', 'continue'
     
     creators = [
-        CxFreezeCreator(script_name, "cxfreeze"),
-        # CythonPy2ExeCreator(script_name, "cython_py2exe"),
-        # CythonPyVanCreator(script_name, "cython_pyvan"),
-        # CythonCompilerCreator(script_name, "cython_compiler"),
-        # CythonBatCreator(script_name, "cython_bat"),
-        # Py2ExeCreator(script_name, "py2exe"),
-        # PyVanCreator(script_name, "pyvan"),
+        CythonCompilerCreator(script_name, "cython_compiler"),
     ]
     
     for creator in creators:
