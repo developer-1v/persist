@@ -16,3 +16,5 @@ Entity(model='cube', color=color.rgba(1, 0, 0, 1), rotation=(44, 44, 44))
 EditorCamera()
 app.run()
 
+input('Press Enter to exit...')
+

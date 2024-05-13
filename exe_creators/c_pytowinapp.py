@@ -1,3 +1,5 @@
+from print_tricks import pt
+pt.easy_imports('main.py')
 from imports_file import *
 
 import os
