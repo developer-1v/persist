@@ -1,5 +1,0 @@
-python311.zip
-..\persist
-
-# Uncomment to run site.main() automatically
-import site
