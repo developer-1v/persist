@@ -20,12 +20,12 @@ from c_cython_py2exe import CythonPy2ExeCreator
 # pt('import c_cython_py2exe')
 from c_cython_pyvan import CythonPyVanCreator
 # pt('import c_cython_pyvan')
-from c_py2exe import Py2ExeCreator
-# pt('import c_py2exe')
+from c_pytowinapp import PytowinappCreator
+# pt('import c_pytowinapp')
 from c_pyvan import PyVanCreator
 # pt('import c_pyvan')
-
-
+from c_cx_nuitka import CxNuitkaCreator
+# pt('import c_cx_nuitka')
 
 # __all__ = ['os', 'sys', 'subprocess', 'Dispatch']
 # __all__ = ['ExeCreator', 'get_next_attempt_number', 'get_output_directory', 'create_shortcut', 'find_and_create_shortcut']

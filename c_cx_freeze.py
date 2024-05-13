@@ -1,7 +1,7 @@
 # import argparse
 from imports_file import *
 
-class CxFreezeCreator:
+class CxFreezeCreator(ExeCreator):
     def __init__(self, script_filename, output_dir):
         self.script_filename = script_filename
         self.output_dir = output_dir

@@ -1,34 +1,28 @@
-print('1')
 from imports_file import *
-print('2')
-# from print_tricks import pt
-# pt.easy_testing(__name__)
-# pt.easy_imports('main.py')
-
-# from c_cx_freeze import CxFreezeCreator
-# from c_cython_py2exe import CythonPy2ExeCreator
-# from c_cython_pyvan import CythonPyVanCreator
-# from c_cython_compiler import CythonCompilerCreator
-# from c_cython_bat import CythonBatCreator
-# from c_py2exe import Py2ExeCreator
-# from c_pyvan import PyVanCreator
 
 
 
-import sys
+
+
+
 
 def main():
     script_name = 'test.py'
     
-    # Simulate detailed command line arguments
-    # Example: ['main.py', 'build', '--target', 'script_name']
-    # You need to adjust these arguments based on the actual expected format.
-    sys.argv = ['main.py', 'build', '--target', script_name]
-    pt(sys.argv)
+    # CxFreezeCreator(script_name, "cxfreeze")
+    # pytowinappCreator(script_name, "pyinstaller")
+    # pt.ex()
+
     execution_mode = 'ask'  # Options: 'ask', 'continue'
     
     creators = [
-        CythonCompilerCreator(script_name, "cython_compiler"),
+        # CxFreezeCreator(script_name, "cxfreeze"),
+        # CythonPytowinappCreator(script_name, "cython_pytowinapp"),
+        # CythonPyVanCreator(script_name, "cython_pyvan"),
+        # CythonCompilerCreator(script_name, "cython_compiler"),
+        # CythonBatCreator(script_name, "cython_bat"),
+        PytowinappCreator(script_name, "pytowinapp"),
+        # PyVanCreator(script_name, "pyvan"),
     ]
     
     for creator in creators:
@@ -52,3 +46,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+    
+    
+'''
+Error's: 
+    very possibly are within the ExeCreator class. 
+    
+    Also, instantiating these creators doesn't do anything .We need to 
+    create_exe() method. 
+    
+    '''

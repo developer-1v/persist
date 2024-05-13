@@ -59,13 +59,22 @@ def find_and_create_shortcut(script_name, function_name):
 
 
 class ExeCreator:
-    def __init__(self, script_filename, method_name):
-        self.script_filename = script_filename
+    def __init__(self, source_path, method_name):
+        self.source_path = source_path
         self.method_name = method_name
         self.output_dir = self.get_output_directory()
 
+    def generate_requirements(self):
+        # Ensure the directory exists
+        if not os.path.exists(self.source_path):
+            os.makedirs(self.source_path)
+        
+        # Run pipreqs to generate requirements.txt
+        subprocess.run(['pipreqs', self.source_path, '--force'], check=True)
+
+
     def get_output_directory(self):
-        return get_output_directory(self.script_filename, self.method_name)
+        return get_output_directory(self.source_path, self.method_name)
 
     def create_exe(self):
         raise NotImplementedError("Subclasses should implement this method")
