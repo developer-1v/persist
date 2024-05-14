@@ -65,12 +65,18 @@ class ExeCreator:
         self.output_dir = self.get_output_directory()
 
     def generate_requirements(self):
-        # Ensure the directory exists
-        if not os.path.exists(self.source_path):
-            os.makedirs(self.source_path)
-        
-        # Run pipreqs to generate requirements.txt
-        subprocess.run(['pipreqs', self.source_path, '--force'], check=True)
+        try:
+            pt.c('-- Generating requirements.txt')
+            # Ensure the directory exists
+            if not os.path.exists(self.source_path):
+                os.makedirs(self.source_path)
+            pt(self.source_path)
+            # Run pipreqs to generate requirements.txt
+            subprocess.run(['pipreqs', self.source_path, '--force'], check=True)
+            pt.c('-- Finished Creating requirements.txt')
+        except Exception as e:
+            pt.ex(e)
+            
 
 
     def get_output_directory(self):
