@@ -14,41 +14,49 @@ class PytowinappCreator(ExeCreator):
         super().__init__(source_path, "pytowinapp")
         self.main_file = main_file
 
-    
-    def create_exe(self, show_console=False):
-        from py_to_win_app import Project
-        import os
-
+    def create_exe(self, show_console=True):
+        
         try: 
             self.generate_requirements()
+            ...
         except Exception as e:
             pt.e()
             pt.ex()
-            
+
+        dir, original_dir = self.setup_directories()
         try:
-            dir = os.path.join(os.getcwd(), self.source_path)
-            pt(dir)
-
-            # Change the current working directory to the source path
-            original_dir = os.getcwd()
-            os.chdir(dir)
-
-            project = Project(
-                input_dir=dir,
-                main_file=self.main_file
-            )
-
-            project.build(python_version="3.11.0", show_console=show_console)
-            project.make_dist()
-            
+            self.create_show_console_script(dir)
+            self.build_project(dir, show_console)
         finally:
-            # Change back to the original directory
             os.chdir(original_dir)
-        
+
+
+    def build_project(self, dir, show_console):
+        from py_to_win_app import Project
+
+        project = Project(
+            input_dir=dir,
+            main_file='_show_console_output.py'
+        )
+        project.build(python_version="3.11.0", show_console=show_console)
+        project.make_dist()
+
 if __name__ == "__main__":
-    pytowinapp_creator = PytowinappCreator("test_source_dir", "test_source_file.py")
-    
+    pytowinapp_creator = PytowinappCreator(
+        "test_source_dir", "test_source_file.py"
+        # "C:\.PythonProjects\smak", "smak.py"
+        
+        )
     pt.t()
     pytowinapp_creator.create_exe(show_console=True)
     pt.t()
 
+
+'''
+            ## Change the current working directory to the source path
+            ## this is to prevent pytowinapp from creating build/dist
+            ## in the persist directory, instead of the user's 
+            ## source directory. 
+            # 
+            # 
+            # '''

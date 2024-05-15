@@ -64,6 +64,12 @@ class ExeCreator:
         self.method_name = method_name
         self.output_dir = self.get_output_directory()
 
+    def setup_directories(self):
+        dir = os.path.join(os.getcwd(), self.source_path)
+        original_dir = os.getcwd()
+        os.chdir(dir)
+        return dir, original_dir
+
     def generate_requirements(self):
         try:
             pt.c('-- Generating requirements.txt')
@@ -71,13 +77,35 @@ class ExeCreator:
             if not os.path.exists(self.source_path):
                 os.makedirs(self.source_path)
             pt(self.source_path)
-            # Run pipreqs to generate requirements.txt
-            subprocess.run(['pipreqs', self.source_path, '--force'], check=True)
+
+            ignore_dirs = 'dist,build,venv,pycache'  # No spaces after commas
+            subprocess.run([
+                    'pipreqs', 
+                    self.source_path, 
+                    '--force',  
+                    f'--ignore={ignore_dirs}'  # Ensure no spaces and use '='
+                    ],
+                check=True)
             pt.c('-- Finished Creating requirements.txt')
         except Exception as e:
+            pt.e()
             pt.ex(e)
-            
 
+    def create_show_console_script(self, dir):
+        main_file_absolute_path = os.path.abspath(self.main_file)
+        pt(main_file_absolute_path)
+        main_file_absolute_path = repr(main_file_absolute_path)  # Ensure the path is correctly escaped
+        pt(main_file_absolute_path)
+        
+        script_path = os.path.join(dir, '_show_console_output.py')
+        pt(script_path)
+        with open(script_path, 'w') as f:
+            f.write("import subprocess\n")
+            f.write("import sys\n")
+            f.write("\n")
+            f.write("if __name__ == '__main__':\n")
+            f.write(f"    subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])\n")
+            f.write("    input('Press any key to exit...')\n")
 
     def get_output_directory(self):
         return get_output_directory(self.source_path, self.method_name)
