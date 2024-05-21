@@ -3,8 +3,7 @@ TODO:
     - Ensure that at least while i'm testing, that we .gitignore by default
     all build/dist folders... So make this an optional arg, that for
     me is set to true but for production is set to false. 
-    
-    
+
 
 DIFFICULT libraries to get to compile: 
 - My goal is to have these libraries as tests, to try to get my apps to compile with them.
@@ -20,70 +19,60 @@ When compiling Python applications into an executable (exe) using tools like PyI
 sqlalchemy: While not as complex as graphical libraries, sqlalchemy can still pose challenges due to its dynamic and flexible nature, especially when dealing with different database backends.
 
 '''
-
-
-
-
-
-import math, sys, os 
-
-
-
-
-
-
-
-
-''' TEST '''
-
-
-
-
-
-''' TEST '''
 from print_tricks import pt
-from icecream import ic
-
-var = math.pi
-pt(var)
-ic(var)
-# while True: 
-#     ...
-
-''' TEST '''
-from ursina import *
-
-# app = Ursina(development_mode=False)
-# ee = Entity(model='cube', color=color.rgba(1, 0, 0, 1), rotation=(44, 44, 44))
-# EditorCamera()
-# pt(application.development_mode)
-# pt(ee)
-# app.run()
+import math, sys, os
 
 
-''' TEST '''
-# import pygame
-# def main():
-#     pygame.init()
-#     screen = pygame.display.set_mode((400, 300))
+def run_tests():
+    test_pt_ic()
+    # test_ursina()
+    # test_pyagame1()
+    # test_pygame2()
+    # test_tkinter()
+    # test_matplotlib()
+    ...
 
-#     rect_surface = pygame.Surface((100,50))
-#     rect_surface.fill((255, 255, 255))  # Fill the rectangle surface with white color
+def test_pt_ic():
+    from print_tricks import pt
+    from icecream import ic
 
-#     size = 0
-#     while True:
-#         screen.fill((0, 0, 0))
-#         size += .1  
-#         new_rect = pygame.transform.rotate(rect_surface, size)
-#         screen.blit(new_rect, (0,0))
-#         pygame.display.flip()
+    var = math.pi
+    pt(var)
+    ic(var)
+    # while True: 
+    #     ...
 
-# main()
+def test_ursina():
+    from ursina import Ursina, Entity, color, EditorCamera, application
 
+    app = Ursina(development_mode=False)
+    ee = Entity(model='cube', color=color.rgba(1, 0, 0, 1), rotation=(44, 44, 44))
+    EditorCamera()
+    pt(application.development_mode)
+    pt(ee)
+    app.run()
 
-''' TEST '''
-import pygame
-def main():
+def test_pyagame1():
+    import pygame
+    def main():
+        pygame.init()
+        screen = pygame.display.set_mode((400, 300))
+
+        rect_surface = pygame.Surface((100,50))
+        rect_surface.fill((255, 255, 255))  # Fill the rectangle surface with white color
+
+        size = 0
+        while True:
+            screen.fill((0, 0, 0))
+            size += .1  
+            new_rect = pygame.transform.rotate(rect_surface, size)
+            screen.blit(new_rect, (0,0))
+            pygame.display.flip()
+
+    main()
+
+def test_pygame2(): 
+    import pygame
     pygame.init()
     size = width, height = 640, 480
     speed = [2, 2]
@@ -110,101 +99,52 @@ def main():
         pygame.display.flip()
         pygame.time.delay(10)
 
-main()
+def test_tkinter():
+    import tkinter
+    from tkinter import ttk
+    from tkinter import messagebox
 
-''' TEST '''
-# import tkinter
-# pt(tkinter.TclVersion)
-# from tkinter import messagebox
+    pt(tkinter.TclVersion)
 
-# def on_button_click():
-#     messagebox.showinfo("Information", "Hello, Tkinter!")
+    def on_button_click():
+        messagebox.showinfo("Information", "Hello, Tkinter!")
 
-# app = tkinter.Tk()
-# app.title("Tkinter Example App")
-# button = tkinter.Button(app, text="Click Me", command=on_button_click)
-# button.pack(pady=20)
+    app = tkinter.Tk()
+    app.title("Tkinter Example App")
+    button = ttk.Button(app, text="Click Me", command=on_button_click)
+    button.pack(pady=20)
+    button2 = tkinter.Button(app, text="quit", command=app.quit)
+    button2.pack(pady=20)
 
-# app.mainloop()
+    app.mainloop()
 
-''' TEST '''
-# import matplotlib
-# matplotlib.use('TkAgg')  # Set the backend to TkAgg
-# import matplotlib.pyplot as plt
-# import numpy as np
-# import sys
+def test_matplotlib():
+    import matplotlib
+    matplotlib.use('TkAgg')  # Set the backend to TkAgg
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import sys
 
-# def plot_data():
-#     # Generate some data
-#     x = np.linspace(0, 10, 100)
-#     y = np.sin(x)
+    def plot_data():
+        # Generate some data
+        x = np.linspace(0, 10, 100)
+        y = np.sin(x)
 
-#     # Create a plot
-#     plt.figure()
-#     plt.plot(x, y, label='sin(x)')
-#     plt.title('Sine Wave')
-#     plt.xlabel('X')
-#     plt.ylabel('Y')
-#     plt.legend()
-#     plt.show()
+        # Create a plot
+        plt.figure()
+        plt.plot(x, y, label='sin(x)')
+        plt.title('Sine Wave')
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.legend()
+        plt.show()
 
-# plot_data()
-
+    plot_data()
 
 
-''' TEST '''
 
-''' TEST '''
+if __name__ == "__main__":
+    run_tests()
 
-''' TEST '''
 
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
-
-''' TEST '''
 

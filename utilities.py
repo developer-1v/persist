@@ -106,6 +106,7 @@ class ExeCreator:
             f.write("if __name__ == '__main__':\n")
             f.write(f"    subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])\n")
             f.write("    input('Press any key to exit...')\n")
+            f.write("    sys.exit()\n")
 
     def get_output_directory(self):
         return get_output_directory(self.source_path, self.method_name)
