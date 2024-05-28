@@ -91,7 +91,7 @@ class ExeCreator:
             pt.e()
             pt.ex(e)
 
-    def create_show_console_script(self, dir):
+    def create_show_console_script(self, dir=''):
         main_file_absolute_path = os.path.abspath(self.main_file)
         pt(main_file_absolute_path)
         main_file_absolute_path = repr(main_file_absolute_path)  # Ensure the path is correctly escaped
@@ -99,15 +99,24 @@ class ExeCreator:
         
         script_path = os.path.join(dir, '_show_console_output.py')
         pt(script_path)
+        # with open(script_path, 'w') as f:
+        #     f.write("import subprocess\n")
+        #     f.write("import sys\n")
+        #     f.write("\n")
+        #     f.write("if __name__ == '__main__':\n")
+        #     f.write(f"    subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])\n")
+        #     f.write("    input('Press any key to exit...')\n")
+        #     f.write("    sys.exit()\n")
         with open(script_path, 'w') as f:
-            f.write("import subprocess\n")
-            f.write("import sys\n")
-            f.write("\n")
-            f.write("if __name__ == '__main__':\n")
-            f.write(f"    subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])\n")
-            f.write("    input('Press any key to exit...')\n")
-            f.write("    sys.exit()\n")
+            f.write(textwrap.dedent(f"""
+            import subprocess
+            import sys
 
+            if __name__ == '__main__':
+                subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])
+                input('Press any key to exit...')
+                sys.exit()
+            """))
     def get_output_directory(self):
         return get_output_directory(self.source_path, self.method_name)
 
@@ -123,3 +132,32 @@ class ExeCreator:
         except Exception as e:
             print(f"Failed with {self.method_name}: {e}")
             return False
+
+# if __name__ == '__main__':
+#         main_file_absolute_path = os.path.abspath(__file__)
+#         pt(main_file_absolute_path)
+#         main_file_absolute_path = repr(main_file_absolute_path)  # Ensure the path is correctly escaped
+#         pt(main_file_absolute_path)
+        
+#         script_path = os.path.join('_show_console_output.py')
+#         pt(script_path)
+#         # with open(script_path, 'w') as f:
+#         #     f.write("import subprocess\n")
+#         #     f.write("import sys\n")
+#         #     f.write("\n")
+#         #     f.write("if __name__ == '__main__':\n")
+#         #     f.write(f"    subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])\n")
+#         #     f.write("    input('Press any key to exit...')\n")
+#         #     f.write("    sys.exit()\n")
+#         with open(script_path, 'w') as f:
+#             f.write(textwrap.dedent(f"""
+#             import subprocess
+#             import sys
+
+#             if __name__ == '__main__':
+#                 subprocess.run([sys.executable, {main_file_absolute_path}] + sys.argv[1:])
+#                 input('Press any key to exit...')
+#                 sys.exit()
+#             """))
+
+

@@ -52,7 +52,7 @@ class PyVanCreator(ExeCreator):
             "pydist_sub_dir": "pydist",
             "source_sub_dir": "",
             "verbose": True,
-            # "include_modules": ["tkinter"]
+            "include_modules": ["tkinter"]
         }
 
         pyvan.build(**OPTIONS)
@@ -60,9 +60,10 @@ class PyVanCreator(ExeCreator):
 if __name__ == "__main__":
     pyvan_creator = PyVanCreator(
         "test_source_dir", "test_source_file.py",
-        use_existing_requirements=True,
-        pyvan_generate_pipreqs=False,
-        show_console=True, keep_console_open=True
+        use_existing_requirements=False,
+        pyvan_generate_pipreqs=True,
+        show_console=True, 
+        keep_console_open=True
     )
     pt.t()
     pyvan_creator.create_exe()

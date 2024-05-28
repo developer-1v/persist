@@ -28,7 +28,7 @@ def run_tests():
     # test_ursina()
     # test_pyagame1()
     # test_pygame2()
-    # test_tkinter()
+    test_tkinter()
     # test_matplotlib()
     ...
 
@@ -100,18 +100,19 @@ def test_pygame2():
         pygame.time.delay(10)
 
 def test_tkinter():
-    import tkinter
-    from tkinter import ttk
-    from tkinter import messagebox
+    # import tkinter
+    import threadsafe_tkinter as tkinter
+    # from threadsafe_tkinter import ttk
+    from threadsafe_tkinter import messagebox
 
-    pt(tkinter.TclVersion)
+    # pt(tkinter.TclVersion)
 
     def on_button_click():
-        messagebox.showinfo("Information", "Hello, Tkinter!")
+        tkinter.messagebox.showinfo("Information", "Hello, Tkinter!")
 
     app = tkinter.Tk()
     app.title("Tkinter Example App")
-    button = ttk.Button(app, text="Click Me", command=on_button_click)
+    button = tkinter.Button(app, text="Click Me", command=on_button_click)
     button.pack(pady=20)
     button2 = tkinter.Button(app, text="quit", command=app.quit)
     button2.pack(pady=20)

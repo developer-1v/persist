@@ -1,6 +1,6 @@
 from print_tricks import pt
 
-import os, sys, re
+import os, sys, re, textwrap
 import subprocess
 from win32com.client import Dispatch
 
